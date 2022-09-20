@@ -2,13 +2,13 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: |
    CloundFormation Template for Roman-Numerals-Converter Application.
    This template creates Python Flask Web Application on.
-   Amazon Linux2 (ami-05fa00d4c63e32376) EC2 Instance with
+   Amazon Linux2 EC2 Instance with
    custom security group allowing http connections on port 80 and SSH connection on part 22.
    Roman Numerals Converter Application is downloaded from Github repository, then installed on Flask.
 
 
 Parameters:
-  Keyname:
+  KeyName:
     Description: Enter the name of your Key Pair for SHH connetcitons #bu karşımıza çıkacak.
     Type: AWS::EC2::KeyPair::KeyName
 
@@ -33,19 +33,18 @@ Resources:
     Properties:
       ImageId: ami-05fa00d4c63e32376
       InstanceType: t2.micro
-      KeyName: !Ref KeyName
+      KeyName: !Ref KeyName #11 satır referans
       SecurityGroupIds:
-        - !Ref WebServerSecurityGroup
+        - !Ref WebServerSecurityGroup #16 satır referans
       Tags:
         - Key: Name
           Value: !Sub Web Server of ${AWS::StackName} Stack  #halihazırda oluşmamış daha sonra oluşacaklar için !Sub kullanıyoruz.
       UserData: !Base64 |
-        #!/bin/bash
+        #! /bin/bash
         yum update -y
         yum install python3 -y
         pip3 install flask
         cd /home/ec2-user
-        
         wget https://raw.githubusercontent.com/asumankamberoglu/projects-2022-Project-001-Roman-Numerals-Converter/main/app.py
         mkdir templates
         cd templates
