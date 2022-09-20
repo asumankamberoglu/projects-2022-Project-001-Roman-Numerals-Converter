@@ -33,7 +33,7 @@ Resources:
     Properties:
       ImageId: ami-05fa00d4c63e32376
       InstanceType: t2.micro
-      KeyName: !Ref Keyname
+      KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref WebServerSecurityGroup
       Tags:
@@ -45,6 +45,7 @@ Resources:
         yum install python3 -y
         pip3 install flask
         cd /home/ec2-user
+        
         wget https://raw.githubusercontent.com/asumankamberoglu/projects-2022-Project-001-Roman-Numerals-Converter/main/app.py
         mkdir templates
         cd templates
