@@ -65,7 +65,7 @@ echo $LATEST_AMI
 
 
 -şimdi de instance ı çalıştıralım:
-aws ec2 run-instances --image-id $LATEST_AMI --count 1 --instance-type t2.micro --key-name xxxxxxx --security-groups roman_numbers_sec_grp --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roman_numbers}]' --user-data file:///Users/ODG/Desktop/git_dir/serdar-cw/porfolio_lesson_plan/week_6/CLI_solution/userdata.sh
+aws ec2 run-instances --image-id $LATEST_AMI --count 1 --instance-type t2.micro --key-name asuman --security-groups roman_numbers_sec_grp --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roman_numbers}]' --user-data file:///Users/ODG/Desktop/git_dir/serdar-cw/porfolio_lesson_plan/week_6/CLI_solution/userdata.sh
 
 veya
 
@@ -73,7 +73,7 @@ aws ec2 run-instances \
     --image-id $LATEST_AMI \
     --count 1 \
     --instance-type t2.micro \
-    --key-name xxxxxxx \
+    --key-name asuman \
     --security-groups roman_numbers_sec_grp \
     --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=roman_numbers}]' \
     --user-data file:///home/ec2-user/userdata.sh
@@ -87,12 +87,12 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=roman_numbers" --quer
 aws ec2 describe-instances --filters "Name=tag:Name,Values=roman_numbers" --query 'Reservations[].Instances[].InstanceId[]'
 
 - To delete instances:
-aws ec2 terminate-instances --instance-ids xxxxxxxxxxxx
+aws ec2 terminate-instances --instance-ids "i-0ce0728d8a8a1e9af"
 
 - To delete security groups:
 aws ec2 delete-security-group --group-name roman_numbers_sec_grp
-
-
+çalışan instance ları çeken komut
+aws ec2 describe-instances --filters Name=instance-state-name,Values=running --query "Reservations[].Instances[].InstanceId" --output text
 
 - dokumantasyon:
 https://docs.aws.amazon.com/cli/latest/userguide

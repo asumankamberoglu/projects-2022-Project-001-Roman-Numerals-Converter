@@ -18,7 +18,7 @@ def main_post():
         alpha = request.form['number']
         if not alpha.isdecimal(): #bu sayı desimal değilse (negatif, float) index html kirala ve hata verdir(not valid=True) 
             return render_template('index.html', developer_name='Asuman', not_valid=True)
-        number = int(alpha)
+        number = int(alpha) #sayı alındı ama istenilen aralıkta mı? alt satırda kontrol edelim.
         if not 0 < number < 4000: #sayı bu aralıkta değilse index.html kirala yina hata mesajı verdir.
             return render_template('index.html', developer_name='Asuman', not_valid=True)
         return render_template('result.html', number_decimal = number , number_roman= convert(number), developer_name='Asuman')
